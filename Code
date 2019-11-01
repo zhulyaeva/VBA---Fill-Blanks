@@ -1,0 +1,11 @@
+Sub FillBlanks ()
+Dim Area As Range, LastRow As Long
+  On Error Resume Next
+  LastRow = Cells.Find(What:="*", SearchOrder:=xlRows, _
+               SearchDirection:=xlPrevious, _
+               LookIn:=xlFormulas).Row
+  For Each Area In ActiveCell.EntireColumn(1).Resize(LastRow). _
+               SpecialCells(xlCellTypeBlanks).Areas
+    Area.Value = Area(1).Offset(-1).Value
+  Next
+End Sub
